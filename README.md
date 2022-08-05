@@ -1,4 +1,4 @@
-
+https://www.youtube.com/watch?v=cLMo6DYdJRE
 
 https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform
 https://en.wikipedia.org/wiki/FM-index
