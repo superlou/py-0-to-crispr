@@ -1,8 +1,9 @@
 from timeit import timeit
 from fna import read_fna
-from suffix_array import naive_sa, naive_sa2
+from suffix_array import naive_sa, naive_sa2, bubble_sort_sa, quicksort_sa
 from time import time
-from sorts import bubble_sort, quicksort
+from sorts import quicksort
+import matplotlib.pyplot as plt
 
 import pandas as pd
 
@@ -13,52 +14,45 @@ seq, _ = read_fna("./gene.fna")
 
 # print(t1, t2)
 
-df = pd.DataFrame(columns=["method", "len", "duration"])
+trials = []
 
-for n in [10, 100, 1000]:
+for n in [10, 100, 500, 1000, 2000]:
     print(f"Bubble sort with sequence length {n}")
     text = seq[:n]
     start = time()
 
-    array = list(range(len(text)))
+    sa = bubble_sort_sa(text)
 
-    def cmp(a, b):
-        return text[a:] > text[b:]
-
-    bubble_sort(array, cmp)
     duration = time() - start
     print(duration)
-    pd.concat(df, {
+    trials.append({
         "method": "bubble sort",
         "len": n,
         "duration": duration,
-    }, ignore_index=True)
+    })
 
-for n in [10, 100, 1000, 10000]:
+for n in [10, 100, 500, 1000, 5000, 10000, 20000]:
     print(f"Quicksort with sequence length {n}")
     text = seq[:n]
     start = time()
     
-    array = list(range(len(text)))
+    sa = quicksort_sa(text)
 
-    def cmp(a, b):
-        a = text[a:]
-        b = text[b:]
-
-        if a > b:
-            return 1
-        elif a < b:
-            return -1
-        else:
-            return 0
-
-    result = quicksort(array, cmp)
     duration = time() - start
     print(duration)
-    df.concat({
+    trials.append({
         "method": "quicksort",
         "len": n,
         "duration": duration,
-    }, ignore_index=True)
+    })
 
+df = pd.DataFrame(trials)
 print(df)
+
+for method, data in df.groupby("method"):
+    plt.plot(data.len, data.duration, label=method)
+
+plt.semilogx()
+plt.legend()
+plt.grid()
+plt.show()
