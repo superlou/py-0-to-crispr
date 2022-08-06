@@ -54,3 +54,9 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+    # # This is depressingly fast
+    # seq, _ = read_fna("./gene.fna")
+    # import re
+    # m = re.findall("GTAAAGGATG", seq.decode("ascii"))
+    # print(m)

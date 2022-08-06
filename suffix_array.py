@@ -81,25 +81,3 @@ def sa_search(query: bytes, text: bytes, sa) -> List[int]:
             right = mid
 
     return [sa[i] for i in range(start, right)]
-
-
-def main():
-    text = b"banana$"
-
-    sa = naive_sa(text)
-    assert [6, 5, 3, 1, 0, 4, 2] == sa
-
-    sa = naive_sa2(text)
-    assert [6, 5, 3, 1, 0, 4, 2] == sa
-
-    sa = naive_sa(b"gtcccgatgtcatgtcagga$")
-    assert [20, 19, 16, 11, 6, 15, 10, 2, 3, 4,
-            18, 5, 17, 13, 8, 0, 14, 9, 1, 12, 7] == sa
-
-    text = b"This is some text that has repeated text in textualized$"
-    sa = naive_sa2(text)
-    print(sa_search(b"his", text, sa))
-
-
-if __name__ == "__main__":
-    main()
