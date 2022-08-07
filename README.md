@@ -20,3 +20,8 @@ https://realpython.com/sorting-algorithms-python/
 At some point, try regex search? Python built-in substring search?
 
 5. [Presentation on SA-IS](https://web.stanford.edu/class/archive/cs/cs166/cs166.1196/lectures/04/Small04.pdf)
+
+
+You want find PAMs within the first few exons that minimize off-target effects.
+
+MIT specificity score

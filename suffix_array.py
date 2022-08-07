@@ -29,7 +29,7 @@ def bubble_sort_sa(text: bytearray):
     def cmp(a, b):
         return text[a:] > text[b:]
 
-    bubble_sort(array, cmp) 
+    bubble_sort(array, cmp)
 
     return array
 
@@ -50,6 +50,37 @@ def quicksort_sa(text: bytearray):
 
     result = quicksort(array, cmp)
     return result
+
+
+def build_sl_types(text: bytearray):
+    sl_type = [None] * len(text)
+
+    def is_s_type(k):
+        return text[k:] == b"$" or \
+            text[k:] < text[k+1:] or \
+            (text[k:] == text[k+1] and sl_type[k+1] == b"s")
+
+    def is_l_type(k):
+        return text[k:] > text[k+1:] or \
+            (text[k:] == text[k+1:] and sl_type[k+1] == b"l")
+
+    for i in reversed(range(len(text))):
+        if is_s_type(i):
+            sl_type[i] = "s"
+        elif is_l_type(i):
+            sl_type[i] = "l"
+        else:
+            raise Exception("Must be S or L type suffix")
+
+    return sl_type
+
+
+def sa_is_sa(text: bytearray):
+    sl = build_sl_types(text)
+
+
+
+    return []
 
 
 def sa_search(query: bytes, text: bytes, sa) -> List[int]:
