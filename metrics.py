@@ -49,6 +49,8 @@ def main():
     plt.semilogx()
     plt.legend()
     plt.grid()
+    plt.ylabel("Time (s)")
+    plt.xlabel("Length")
     plt.show()
 
 
